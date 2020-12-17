@@ -34,13 +34,9 @@ while True:
     fortsätt = True
     # göra val (ta ett till kort eller stanna   )  
     while fortsätt:
-    # fråga användaren om hen vill ta emot ett kort
-    taKort = input("Ta ett till kort [Y/N]")
-    
-    if taKort == "Y":
-        # Dela ut kort
-        hand.append(lek.pop(0))
-        # Skriv ut handen
-        skrivUtHanden(hand)
-    else:
-        fortsätt = False    
+        taKort = input("Ta ett till kort [Y/N]")
+        if taKort == "Y":
+            hand.append(lek.pop(0))
+            skrivUtHanden(hand)
+        else:
+            fortsätt = False    
