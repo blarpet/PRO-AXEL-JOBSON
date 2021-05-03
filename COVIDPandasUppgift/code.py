@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 run = True
 
 nd = pd.read_csv("National_Daily_Deaths.csv")
@@ -12,7 +13,8 @@ while run = True:
     if q1 == "NDD":
         q1.2 = str(input("Do you wish to either view Line chart or a Frequency diagram of the National Daily Deaths? [LC/FD]"))
         if q1.2 == "LC":
-            #Loads the line chart of NDD
+            plt.plot(nd.date, nd.National_Daily_Deaths)
+            plt.show()
         elif q1.2 == "FD":
             #Loads the frequency diagram of the NDD
     if q1 == "NTDAG":
