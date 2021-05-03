@@ -14,7 +14,10 @@ while run = True:
         q1.2 = str(input("Do you wish to either view Line chart or a Frequency diagram of the National Daily Deaths? [LC/FD]"))
         if q1.2 == "LC":
             plt.title("National Daily Deaths in result of Covid")
-            plt.plot(nd.date, nd.National_Daily_Deaths)
+            plt.plot(nd.date, nd.National_Daily_Deaths "b.-")
+            plt.xticks(nd.date[::30])
+            plt.xlabel("Day")
+            plt.ylabel("Casualties")
             plt.show()
         elif q1.2 == "FD":
             #Loads the frequency diagram of the NDD
@@ -26,6 +29,3 @@ while run = True:
             #Loads the bar chart of NTDAG
     elif q1 == "NEITHER":
         run = False
-
-
-
