@@ -1,16 +1,23 @@
-import pandas as pd #Imports pandas
-import matplotlib.pyplot as plt #imports matplotlib.pyplot
-import numpy as np #Imports numpy
-import plotly.io as pio
-import plotly.express as px 
-import plotly.graph_objects as go
+import pandas as pd 
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+import plotly.express as px
+import numpy as np
+
+np.random.seed(2020)
+
+app = dash.Dash(__name__)
+
+app.layout = html.Div([
+    dcc.Graph(id="graph")
+])
 
 
-nd = pd.read_csv("National_Daily_Deaths.csv")
-nt = pd.read_csv("National_Total_Deaths_by_Age_Group.csv")
-gd = pd.read_csv("Gender_Data.csv")
+def display_color(std):
+    data = np.random.normal(std, size=500)
+    fig = px.histogram(data, nbins=30, range_x=[-10, 10])
+    return fig
 
-fig = px.line(nt, x="Age_Group", y="Total_Cases", labels={"x": "Age groups", "y" : "Total Cases"})
-fig = px.line(nt, x="Age_Group", y="Total_ICU_Admissions", labels={"x": "Age groups", "y" : "Total ICU Admissions"})
-fig = px.line(nt, x="Age_Group", y="Total_Deaths", labels={"x": "Age groups", "y" : ["Total Cases", "Total Deaths, Total ICU Admissions"]})
-fig.write_html('first_figure.html', auto_open=True)
+app.run_server(debug=True)
