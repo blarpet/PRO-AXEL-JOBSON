@@ -17,6 +17,9 @@ def subplotcreat(name,a,b,c, y_label,ticks1,ticks2,x,y): #Function for making ba
     plt.xticks(ticks1, ticks2)
     plt.ylabel(y_label)
 
+
+
+
 while run == True: #While true loop
     q1 = str(input("Do you wish to either view National Daily Deaths or the National Total Deaths by Age Group or Gender Data? [NDD/NTDAG/GD/EXIT]")) #Input question
     if q1 == "NDD": #If the answer is NDD it asks another question for which kind of chart of the 2 that you can choose between
@@ -47,19 +50,9 @@ while run == True: #While true loop
             plt.show()
         if q1_3 == "BC":
             labels = ["0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90+"]
-
             convLabels = np.arange(len(labels))
-            plt.subplot(2,2,1)
-            plt.bar(convLabels, nt.Total_Deaths)
-            plt.title("Total deaths for every age group")
-            plt.ylabel("Casualties")
-            plt.xticks(convLabels, labels)
-
-            plt.subplot(2,2,2)
-            plt.bar(convLabels, nt.Total_Cases)
-            plt.title(("Total cases for every age group"))
-            plt.ylabel("Cases")
-            plt.xticks(convLabels, labels)
+            subplotcreat(("Total deaths for every age group"),2,2,1,"Casualties",convLabels,labels,convLabels,nt.Total_Deaths)
+            subplotcreat(("Total cases for every age group"),2,2,2,"Cases",convLabels,labels,convLabels,nt.Total_Cases)
             plt.show() #Quick tip to widen this to full screen once you open it, it might be different if your screen has a different resolution but who knows, i dont for sure
     elif q1 == "GD":
         q1_4 = str(input("Do you wish to see the gender data in a pie chart? [PC]"))
