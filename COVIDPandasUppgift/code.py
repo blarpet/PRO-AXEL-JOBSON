@@ -58,3 +58,9 @@ while run == True: #While true loop
             fig.write_html('first_figure.html', auto_open=True)
     elif q1 == "EXIT":
         run = False
+
+
+
+
+
+

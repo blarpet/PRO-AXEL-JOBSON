@@ -11,31 +11,21 @@ app = dash.Dash(__name__)
 
 
 # skapa närvarograd proccent
-df = pd.read_csv("National_Total_Deaths_by_Age_Group.csv")
-#TE19 = np.random.randint(50,100,29)
-#NA19 = np.random.randint(20,100,25)
+TE19 = np.random.randint(50,100,29)
+NA19 = np.random.randint(20,100,25)
 
+df_TE19 = pd.DataFrame(dict(Närvarograd=TE19))
+df_NA19 = pd.DataFrame(dict(Närvarograd=NA19))
 
-
-#df_TE19 = pd.DataFrame(dict(Närvarograd=TE19))
-#df_NA19 = pd.DataFrame(dict(Närvarograd=NA19))
-df_AG = df[df["Age_Group"] == "0-9"]
-df_AG = df_AG.transpose().iloc[1:]
-
-fig = px.bar(df_AG, y= ["0"], title="Närvarograd för olika klasser")
-
-options = []
-
-for age in df.Age_Group:
-    options.append(dict(label = age, value = age))
-
+fig = px.bar(df_NA19, y="Närvarograd", title="Närvarograd för olika klasser")
 
 app.layout = HTML.Div(children=[
     HTML.H1(children="Närvarograd för olika klasser"),
 
     dcc.Dropdown(
     id="drop",
-    options=options, value="0-9"
+    options=[dict(label="TE19", value="TE19"),
+             dict(label="NA19", value="NA19")]
     ),
 
     dcc.Graph(
@@ -50,12 +40,12 @@ app.layout = HTML.Div(children=[
 )
 
 def update_figure(value):
-    df_AG = df[df["Age_Group"] == value]
+    if value == "TE19": df = df_TE19
+    elif value == "NA19": df = df_NA19
 
-    fig = px.bar(df_AG, title=f"Närvarograd i procent för {value}")
+    fig = px.bar(df, y="Närvarograd", title=f"Närvarograd i procent för {value}")
     fig.update_layout(transition_duration=500)
     return fig
 
 if __name__ ==  "__main__":
     app.run_server(debug=True)
-
