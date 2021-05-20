@@ -12,30 +12,25 @@ app = dash.Dash(__name__)
 
 # skapa närvarograd proccent
 df = pd.read_csv("National_Total_Deaths_by_Age_Group.csv")
-#TE19 = np.random.randint(50,100,29)
-#NA19 = np.random.randint(20,100,25)
 
 
 
-#df_TE19 = pd.DataFrame(dict(Närvarograd=TE19))
-#df_NA19 = pd.DataFrame(dict(Närvarograd=NA19))
 df_AG = df[df["Age_Group"] == "0-9"]
 df_AG = df_AG.transpose().iloc[1:]
 
-fig = px.bar(df_AG, x = , y= ["0"], title="Närvarograd för olika klasser")
+rlist = [df.Total_Cases, df.Total_ICU_Admissions, df.Total_Deaths]
+
+fig = px.bar(df, x=df.Age_Group, y= rlist, title="Antal fall")
 
 options = []
 
-for age in df.Age_Group:
-    options.append(dict(label = age, value = age))
-
 
 app.layout = HTML.Div(children=[
-    HTML.H1(children="Närvarograd för olika klasser"),
+    HTML.H1(children="Antal fall"),
 
     dcc.Dropdown(
     id="drop",
-    options=options, value="0-9"
+    options=dict(label="Total_Cases", value="Total_Cases")
     ),
 
     dcc.Graph(
@@ -52,7 +47,7 @@ app.layout = HTML.Div(children=[
 def update_figure(value):
     df_AG = df[df["Age_Group"] == value]
 
-    fig = px.bar(df_AG, title=f"Närvarograd i procent för {value}")
+    fig = px.bar(df, x=df.Age_Group, y=rlist, title="Antal fall")
     fig.update_layout(transition_duration=500)
     return fig
 
