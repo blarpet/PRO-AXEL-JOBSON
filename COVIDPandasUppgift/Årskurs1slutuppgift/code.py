@@ -1,3 +1,5 @@
+
+
 import pandas as pd #Imports pandas
 import matplotlib.pyplot as plt #imports matplotlib.pyplot
 import numpy as np #Imports numpy
@@ -44,7 +46,7 @@ while run == True: #While true loop
             plt.ylabel("Casualties") #Sets Y name
             plt.show() #Shows diagram
     elif q1 == "NTDAG":
-        q1_3 = str(input("In which way do you wish to see the data in the chosen CSV file? Pie chart of Bar chart? [PC/BC/LC]"))
+        q1_3 = str(input("In which way do you wish to see the data in the chosen CSV file? Pie chart of Bar chart? [PC/BC]"))
         if q1_3 == "PC": #Making a pie chart
             labels = ["", "", "", "", "", "50-59", "60-69", "70-79", "80-89", "90+"]
             plt.title("Pie chart of which age groups has the biggest percentage of casualties.") #Pie chart name
