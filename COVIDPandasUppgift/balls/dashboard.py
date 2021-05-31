@@ -22,7 +22,7 @@ df = pd.read_csv("National_Total_Deaths_by_Age_Group.csv")
 df_AG = df[df["Age_Group"] == "0-9"]
 df_AG = df_AG.transpose().iloc[1:]
 
-fig = px.bar(df_AG, x = , y= ["0"], title="Närvarograd för olika klasser")
+fig = px.bar(df_AG, y= ["0"], title="Närvarograd för olika klasser")
 
 options = []
 
@@ -58,4 +58,3 @@ def update_figure(value):
 
 if __name__ ==  "__main__":
     app.run_server(debug=True)
-
